@@ -1,0 +1,55 @@
+<html>
+    <label for="country">Country: </label>
+    <select name="country" id="coun">
+        <option>Select Country</option>
+    </select>
+    <br><br>
+    <label for="state">State: </label>
+    <select name="state" id="sta">
+        <option>Select State</option>
+    </select>
+    <br><br>
+    <label for="city">City: </label>
+    <select name="city" id="cit">
+        <option>Select City</option>
+    </select>
+    <script>
+        var countryObject = {
+  "India": {
+    "UP": ["Kanpur", "Noida", "Ghaziabad", "Lucknow"],
+    "Uttrakhand": ["Nanital", "Dehradun", "Almora", "Haridwar"],
+    "Maharashtra": ["Mumbai", "Pune", "Nagpur", "Nashik"]
+  },
+  "UK": {
+    "England": ["London", "Liverpool", "Manchester"],
+    "Scotland": ["Glasgow", "Montrose", "Troon"]
+  }
+}
+window.onload = function() {
+  var countrySel = document.getElementById("coun");
+  var stateSel = document.getElementById("sta");
+  var citySel = document.getElementById("cit");
+  for (var x in countryObject) {
+    countrySel.options[countrySel.options.length] = new Option(x, x);
+  }
+  countrySel.onchange = function() {
+    //empty Chapters- and Topics- dropdowns
+    stateSel.length = 1;
+    citySel.length = 1;
+    //display correct values
+    for (var y in countryObject[this.value]) {
+      stateSel.options[stateSel.options.length] = new Option(y, y);
+    }
+  }
+  stateSel.onchange = function() {
+    //empty Chapters dropdown
+    citySel.length = 1;
+    //display correct values
+    var z = countryObject[countrySel.value][this.value];
+    for (var i = 0; i < z.length; i++) {
+      citySel.options[citySel.options.length] = new Option(z[i], z[i]);
+    }
+  }
+}
+    </script>
+</html>
